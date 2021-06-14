@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Verify</title>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<link rel="icon" type="" href="images/logIn.ico">
+</head>
+<body>
+	<header>
+	</header>
+	<main>
+		<h1 id="user-login">Restaurant Verify </h1>
+		<h1><i class="fas fa-sign-in-alt"></i></h1>
+		<div>
+			<form action="/signup"method="POST">
+				<input type="hidden" name="email"id="email"value="<%=email%>">
+				<input type="hidden" name="name"value="<%=name%>">
+				<input type="hidden" name="hash"value="<%=hash%>">
+				<input type="hidden" name="password"id="password"value="<%=password%>">
+				<input type="text" name="otp"id="password"placeholder="Otp"required>
+				<button type="submit">SignUp</button>
+			</form>
+			<p>Already a user LogIn here <a href="/login">LogIn</a></p>
+		</div>
+
+
+
+	</main>
+	<script type="text/javascript" src="/js/home.js"></script>
+
+</body>
+</html>

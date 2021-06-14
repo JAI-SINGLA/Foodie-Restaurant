@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LogIn</title>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<link rel="icon" type="" href="images/logIn.ico">
+</head>
+<body>
+	<header>
+	</header>
+	<main>
+		<h1 id="user-login">Restaurant SignUp </h1>
+		<h1><i class="fas fa-sign-in-alt"></i></h1>
+		<div>
+			<form action="/signup"method="POST">
+				<input type="email" name="email"id="email"placeholder="Email" required>
+				<input type="text" name="name"placeholder="Restaurnt Name"required>
+				<input type="url" name="image"placeholder="Restaurnt Image Url"required>
+				<input type="text" name="item"placeholder="Your Speciality"required>
+				<input type="password" name="password"id="password"placeholder="Password"required>
+				<input type="password" name="confirmPassword"id="password"placeholder="Confirm Password"required>
+				<button type="submit">SignUp</button>
+			</form>
+			<p>Already a user LogIn here <a href="/login">LogIn</a></p>
+		</div>
+
+
+
+	</main>
+	<script type="text/javascript" src="/js/home.js"></script>
+
+</body>
+</html>

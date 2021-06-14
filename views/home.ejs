@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/*div{
+			width:50%;
+			margin:auto;
+		}*/
+		body{
+			font-size: 0.9rem;
+		}
+		section{
+			margin-top:50px;
+		}
+		.table-margin{
+			margin-bottom: 0px;
+			font-size: 25px;
+		}
+		.btn-disabled{
+			cursor: not-allowed;
+    		pointer-events: none;
+    		opacity: 0.5;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+	<header>
+		<section>
+			<h2>Restaurant Name</h2>
+		<p><%=user.name%></p>
+	</section>
+	<section>
+		<h2>Email</h2>
+		<p><%=user.email%></p>
+	</section>
+	<section>
+		<h3 class="table-margin">Items You Offer</h3>
+		<table cellspacing="20" cellpadding="5">
+			<tr>
+				<th>Item Name</th>
+				<th>Item Price</th>
+				<th></th>
+			</tr>
+			<%for(i of user.items){%>
+			<tr>
+			<td><%=i.itemName%></td>
+			<td><%=i.itemPrice%></td>
+			<td><a href="<%='/deleteItem/'+i._id%>">Delete</a></td>
+			</tr>
+			<br>
+	<%}%>
+		</table>
+	</section>
+	<section>
+		<h3 class="table-margin">Where You Deliver</h3>
+		<table cellspacing="15" cellpadding="5">
+			<tr>
+				<th>PinCode</th>
+				<th>Area</th>
+				<th>Time</th>
+				<th>Delivery Charges</th>
+				<th></th>
+			</tr>
+		<%for(i of user.delivery){%>
+		<tr>
+			<td><%=i.pincode%></td>
+			<td><%=i.area%></td>
+			<td><%=i.time%></td>
+			<td><%=i.price%></td>
+			<td><a href="<%='/deleteDelivery/'+i._id%>">Delete</a></td>
+		</tr>	
+			<br>
+
+	<%}%>
+</table>
+	</section>
+	</header>
+	<form action="/addItem"method="POST">
+		<h2>Item</h2>
+		<input type="text" name="itemName"placeholder="Item Name">
+		<input type="text" name="itemPrice"placeholder="Item Price">
+		<input type="url" name="itemImage"placeholder="Image Url">
+		<button type="submit">Add</button>
+	</form>
+	<form action="/addDelivery"method="POST">
+		<h2>Delivery</h2>
+		<input type="text" name="pincode"placeholder="pincode">
+		<input type="text" name="area"placeholder="area">
+		<input type="number" name="time"placeholder="Time in mins">
+		<input type="text" name="price"placeholder="Delivery Price">
+		<button type="submit">Add</button>
+	</form>
+
+		<h2>Order Recieived</h2>
+	<%for(let i=allOrders.length-1;i>=0;i--){%>
+	<div class="row border">
+		<div class="col col-sm-12">
+		<div class="row">
+			<div class="col"><p>od_id:<span style="font-size: 0.7rem;"><%=allOrders[i].orderId%></span></p></div>
+			<div class="col"><p>Item: <%=allOrders[i].itemName%></p></div>
+			<div class="col"><p>Quan:<%=allOrders[i].quantity%></p></div>
+			<div class="col"><p>Payment:<%=allOrders[i].amount%>+<%=allOrders[i].delivery%></p></div>
+		</div>
+		<div class="row">
+			<div class="col"><p>Name:<%=allOrders[i].address[0].name%></p></div>
+			<div class="col"><p>Mob:<%=allOrders[i].address[0].phone%></p></div>
+			<div class="col"><p>Details:<%=allOrders[i].address[0].details%></p></div>
+			<div class="col"><p>Area:<%=allOrders[i].address[0].area%></p></div>
+			<div class="col"><p>Pin:<%=allOrders[i].address[0].pincode%></p></div>
+
+
+		</div>
+		<div class="row">
+			<div class="col"><p>Time:<%=allOrders[i].txnDate%></p></div>
+			<div class="col"><p>Status:<%=allOrders[i].status%></p></div>
+			<div class="col">
+			<form action="/change"method="POST">
+				<input type="hidden" name="orderId"value="<%=allOrders[i].orderId%>"required>
+				<input type="hidden" name="itemId"value="<%=allOrders[i].itemId%>"required>
+				<input type="hidden" name="status"value="<%=allOrders[i].status%>"required>
+				<%if(allOrders[i].status=="Delivered"||allOrders[i].status=="Cancelled-Refunded"){%>
+				<p><button class="btn-disabled"type="submit">Change</button></p>
+			<%}else{%><p><button type="submit">Change</button></p>
+				<%}%>
+			</form>
+		</div>
+		<div class="col">
+		<form action="/cancel"method="Post">
+				<input type="hidden" name="orderId"value="<%=allOrders[i].orderId%>"required>
+				<input type="hidden" name="itemId"value="<%=allOrders[i].itemId%>"required>
+				<input type="hidden" name="status"value="<%=allOrders[i].status%>"required>
+				<%if(allOrders[i].status=="Delivered"||allOrders[i].status=="Cancelled-Refunded"){%>
+				<p><button class="btn-disabled"type="submit">Cancel</button></p>
+			<%}else{%><p><button type="submit">Cancel</button></p>
+				<%}%>
+			</form>
+		</div>
+		</div>
+	</div>
+</div>
+<%}%>
+
+
+	<a href="/signout">LogOut</a>
+		</div>
+
+
+</body>
+
+
+</html>

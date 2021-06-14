@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+	<h2>Redirecting: </h2>
+	<form action="/refund-intermediate"name="autoSubmit" method="POST">
+		<input type="hidden" name="orderId"value="<%=response.body.orderId%>">
+		<input type="hidden"name="refId"value="<%=response.body.refId%>">
+	</form>
+	<script type="text/javascript">
+		window.onload = function(){
+  document.forms['autoSubmit'].submit();
+}
+	</script> 
+
+
+</body>
+</html>
